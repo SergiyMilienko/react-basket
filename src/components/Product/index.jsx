@@ -1,10 +1,11 @@
 import ButtonDelete from "../ButtonDelete";
 import Count from "../Count";
 import "./style.scss"
-
+import priceFormatter from "../../utils/priceFormatter";
 
 const Product = ({product, deleteProduct, increase, decrease, changeValue}) => {
     const {img, title, priceTotal, count, id} = product;
+
     return (
         <section className="product">
                         <div className="product__img">
@@ -15,7 +16,7 @@ const Product = ({product, deleteProduct, increase, decrease, changeValue}) => {
                         </div>
                             <Count count={count} increase={increase} decrease={decrease} changeValue={changeValue} id={id}/>
                         <div className="product__price">
-                            {priceTotal}
+                            {priceFormatter.format(priceTotal)}
                         </div>
                         <div className="product__controls">
                             <ButtonDelete deleteProduct={deleteProduct} id={id}/>

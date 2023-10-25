@@ -2,10 +2,21 @@ import CartFooter from "../CartFooter";
 import CartHeader from "../CartHeader";
 import Product from "../Product";
 import data from "./../../data";
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 
 const Cart = () => {
     const [cart, setCart] = useState(data)
+    const [total, setTotal] = useState({
+        price: cart.reduce((prev, curr) => { return prev + curr.priceTotal}, 0),
+        count: cart.reduce((prev, curr) => {return prev + curr.count}, 0)
+    })
+
+    useEffect(() => {
+        setTotal({
+            price: cart.reduce((prev, curr) => { return prev + curr.priceTotal }, 0),
+            count: cart.reduce((prev, curr) => { return prev + curr.count }, 0)
+        })
+    }, [cart])
 
     const deleteProduct = (id) => {
         setCart((cart) =>
@@ -59,6 +70,7 @@ const Cart = () => {
             })
         })
     }
+
     const products = cart.map((product) => {
         return <Product product={product} 
                         key={product.id} 
@@ -71,7 +83,7 @@ const Cart = () => {
         <section className="cart">
             <CartHeader/>
             {products}
-            <CartFooter/>
+            <CartFooter total={total}/>
         </section>
     );
 }
