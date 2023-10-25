@@ -3,8 +3,8 @@ import Count from "../Count";
 import "./style.scss"
 
 
-const Product = ({product, deleteProduct}) => {
-    const {img, title, price, count, id} = product;
+const Product = ({product, deleteProduct, increase, decrease, changeValue}) => {
+    const {img, title, priceTotal, count, id} = product;
     return (
         <section className="product">
                         <div className="product__img">
@@ -13,9 +13,9 @@ const Product = ({product, deleteProduct}) => {
                         <div className="product__title">
                             {title}
                         </div>
-                        {/* <Count/> */}
+                            <Count count={count} increase={increase} decrease={decrease} changeValue={changeValue} id={id}/>
                         <div className="product__price">
-                            {price}
+                            {priceTotal}
                         </div>
                         <div className="product__controls">
                             <ButtonDelete deleteProduct={deleteProduct} id={id}/>
